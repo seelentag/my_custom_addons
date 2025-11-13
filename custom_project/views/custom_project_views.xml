@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="custom_project_view_form" model="ir.ui.view">
+        <field name="name">custom.project.view.form</field>
+        <field name="model">custom.project</field>
+        <field name="arch" type="xml">
+            <form string="Project">
+                <header></header>
+                <sheet>
+                    <h1><field name="name"/></h1>
+                    <notebook>
+                        <page string="Jobsite Inventory">
+                            <field name="inventory_line_ids">
+                                <tree string="Inventory" editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="quantity"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Transfers">
+                            <p>Transfers will be managed here.</p>
+                        </page>
+                        <page string="Description">
+                            <field name="description"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="custom_project_view_tree" model="ir.ui.view">
+        <field name="name">custom.project.view.tree</field>
+        <field name="model">custom.project</field>
+        <field name="arch" type="xml">
+            <tree string="Projects">
+                <field name="name"/>
+                <field name="user_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_custom_project" model="ir.actions.act_window">
+        <field name="name">Custom Projects</field>
+        <field name="res_model">custom.project</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_custom_project_root" name="My Projects"/>
+    <menuitem id="menu_custom_project"
+        name="Projects"
+        parent="menu_custom_project_root"
+        action="action_custom_project"/>
+</odoo>
